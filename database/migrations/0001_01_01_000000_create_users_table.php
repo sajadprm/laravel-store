@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\userStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +14,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name')->nullable();
+            $table->string('user_name')->nullable();
+            $table->string('mobile')->nullable()->unique();
+            $table->string('phone')->nullable()->unique();
+            $table->string('email')->nullable()->unique();
+            $table->string('avatar')->nullable();
+            $table->boolean('is_admin')->default(false);
+            $table->string('watsapp')->nullable();
+            $table->string('tellegram')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('bale')->nullable();
+            $table->string('status')->default(userStatus::Active->value);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
